@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>Login events</name>
+    <events>
+        <comment>This global variable stores the username that we enter on the login screen. It&apos;s then read from the &apos;Chat&apos; layout and used when logging in to the signalling server.</comment>
+        <variable comment="Name entered on login screen" constant="0" name="MyUsername" sid="2294275323197028" static="0" type="text"></variable>
+        <event-block sid="3863182249228078">
+            <conditions>
+                <condition id="-2" name="On start of layout" sid="2705455514287463" type="System" />
+            </conditions>
+            <actions>
+                <action id="6" name="Set focused" sid="5804961453505722" type="NameTextBox" />
+            </actions>
+            <sub-events>
+                <comment>If multiplayer is not supported by this browser, indicate this on the login screen.</comment>
+                <event-block sid="3827041909121878">
+                    <conditions>
+                        <condition id="12" inverted="1" name="Supports multiplayer" sid="3473878772382697" type="Multiplayer" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="6476757648360684" type="Title">
+                            <param id="0" name="Text">&quot;Multiplayer not supported&quot;</param>
+                        </action>
+                        <action id="4" name="Set font color" sid="2860201698171315" type="Title">
+                            <param id="0" name="Color">rgb(255, 0, 0)</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>Make the &apos;Join&apos; button disabled if the entered name is empty, so the user cannot try to join without first entering a name.</comment>
+        <event-block sid="9849642233442486">
+            <conditions>
+                <condition id="1" name="On text changed" sid="7221625448986548" type="NameTextBox" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="8787007233602076">
+                    <conditions>
+                        <condition id="0" name="Compare text" sid="6965443884440849" type="NameTextBox">
+                            <param id="0" name="Text">&quot;&quot;</param>
+                            <param id="1" name="Case">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="3" name="Set enabled" sid="3966967504728742" type="JoinButton">
+                            <param id="0" name="Mode">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="572687386939787">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="816905712477163" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="3" name="Set enabled" sid="6686413745652499" type="JoinButton">
+                            <param id="0" name="Mode">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>When clicking &apos;Join&apos; or pressing enter with a non-empty name, store the entered name in the global variable and go to the Chat layout which will then try to connect.</comment>
+        <event-block any="1" sid="9482238556812048">
+            <conditions>
+                <condition id="0" name="On clicked" sid="9839453511019038" type="JoinButton" />
+                <condition id="0" name="On key pressed" sid="8525359706670102" type="Keyboard">
+                    <param id="0" name="Key">13 (Return)</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="5514339979202341">
+                    <conditions>
+                        <condition id="0" inverted="1" name="Compare text" sid="4390230649294218" type="NameTextBox">
+                            <param id="0" name="Text">&quot;&quot;</param>
+                            <param id="1" name="Case">0</param>
+                        </condition>
+                        <condition id="12" name="Supports multiplayer" sid="5272627283773573" type="Multiplayer" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="7663821548089167" type="System">
+                            <param id="0" name="Variable">MyUsername</param>
+                            <param id="1" name="Value">NameTextBox.Text</param>
+                        </action>
+                        <action id="-2" name="Go to layout" sid="3654226867664987" type="System">
+                            <param id="0" name="Layout">Chat</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="5415946635942756">
+            <conditions>
+                <condition id="0" name="On clicked" sid="7623129030249331" type="ViewTutorial" />
+            </conditions>
+            <actions>
+                <action id="8" name="Open URL in new window" sid="1826296498763063" type="Browser">
+                    <param id="0" name="URL">&quot;https://www.scirra.com/tutorials/906/multiplayer-tutorial-2-chat-room&quot;</param>
+                    <param id="1" name="Tag">&quot;NewWindow&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+    </events>
+</c2eventsheet>
