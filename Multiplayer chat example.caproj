@@ -84,6 +84,9 @@
         <object-type name="Browser" sid="8731513663264036">
             <plugin id="Browser" />
         </object-type>
+        <object-type name="Text" sid="875325268304683">
+            <plugin id="Text" />
+        </object-type>
     </object-folder>
     <families />
     <layout-folder>
